@@ -8,6 +8,11 @@
     height: 55px;
     padding-left: 25px;
     padding-right: 25px;
+    box-sizing: border-box;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
 }
 
 .logo-container{
@@ -17,4 +22,19 @@
     align-items: center;
     justify-content: space-between;
     cursor: pointer;
+    color: white;
+    text-decoration: none;
+}
+
+.menu-button{
+    outline: none;
+    background-color: transparent;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    font-family: ubuntu;
+    font-weight: bold;
+    text-decoration: none;
 }

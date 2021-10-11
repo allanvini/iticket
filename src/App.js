@@ -1,7 +1,6 @@
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import UserContextProvider from "./context/userContext";
 import Menu from "./components/menu/menu";
-import Card from "./components/card/card";
 import Home from "./pages/home";
 import Sobre from "./pages/sobre";
 
