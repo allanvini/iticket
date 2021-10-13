@@ -21,6 +21,8 @@
     width: 100%;
     font-family: ubuntu;
     font-weight: bold;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 .search-button{
@@ -32,4 +34,7 @@
     border: none;
     border-radius: 3px;
     outline: none;
+    font-family: ubuntu;
+    font-weight: bold;
+    font-size: 18px;
 }

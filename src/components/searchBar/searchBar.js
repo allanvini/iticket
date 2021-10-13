@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import styles from './searchBar.module.css';
 
-import searchIcon from '../../assets/icons/search.svg';
+import SearchIcon from '../../assets/icons/searchIcon';
 
 export default function SearchBar({onClick}){
 
@@ -28,7 +28,7 @@ export default function SearchBar({onClick}){
     return (
 
         <div className={styles['bar-container']}>
-            <img src={searchIcon} width={25} height={25} />
+            <SearchIcon width={25} height={25} />
             <input onChange={handleChange} value={search} className={styles['input-field']} />
             <button onClick={setState} className={styles['search-button']}>
                 Buscar

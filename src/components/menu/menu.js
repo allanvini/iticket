@@ -1,7 +1,7 @@
 import { useUserContext } from '../../context/userContext';
 import styles from './menu.module.css';
 import { Link } from 'react-router-dom';
-import ticketIcon from '../../assets/icons/ticket.svg';
+import MainLogo from '../../assets/icons/mainLogo';
 
 export default function Menu() {
 
@@ -20,7 +20,7 @@ export default function Menu() {
     return (
         <nav className={styles['menu-bar']}>
             <Link to="/" className={styles['logo-container']}>
-                <img src={ticketIcon} width={50} height={50} fill="white" />
+                <MainLogo width={50} height={50} fill="white" />
                 <h3>iTicket</h3>
             </Link>
 

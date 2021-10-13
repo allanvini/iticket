@@ -1,8 +1,8 @@
 import styles from './contentContainer.module.css';
 
-export default function ContentContainer({children}){
+export default function ContentContainer({children, style}){
     return (
-        <div className={styles['container']}>
+        <div className={styles['container']} style={style}>
             {children}
         </div>
     )

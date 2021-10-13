@@ -12,7 +12,7 @@ export default function Home() {
     const [movieList, setMovieList] = useState([]);
 
     useEffect(async()=>{
-        await axios.get(`http://localhost:8080/tickets/filter?movie=`).then((response)=>{
+        await axios.get(`http://localhost:8080/tickets`).then((response)=>{
             setMovieList(response.data)
         }).catch((err)=>{
             console.log(err);
