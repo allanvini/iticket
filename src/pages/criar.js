@@ -12,7 +12,7 @@ export default function Criar() {
 
     const history = useHistory();
 
-    const { userContext, setUserContext } = useUserContext();
+    const { userContext } = useUserContext();
 
     const [movieData, setMovieData] = useState({
         movie: '',
