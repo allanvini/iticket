@@ -1,0 +1,128 @@
+import { useParams } from "react-router";
+import { useEffect, useState } from "react";
+import axios from 'axios';
+import { useHistory } from 'react-router';
+import styles from '../styles/editar.module.css';
+
+import ContentContainer from "../components/contentContainer/contentContainer";
+import BackIcon from '../assets/icons/backIcon';
+import CheckIcon from '../assets/icons/checkIcon';
+
+const model = {
+    id: 0,
+    movie: '',
+    link: '',
+    movieCover: '',
+    inteira: 0,
+    meia: 0,
+    userId: 0,
+    cinema: ''
+}
+
+export default function Editar() {
+
+    const { id } = useParams();
+    const history = useHistory();
+
+    const [movieData, setMovieData] = useState(model);
+    const [cinemasList, setCinemasList] = useState([]);
+
+    useEffect(async () => {
+        await axios.get(`http://localhost:8080/tickets/edit?id=${id}`).then((response) => {
+            setMovieData(response.data);
+        }).catch((error) => {
+            alert('Houve um erro, por favor tente novamente mais tarde')
+            setMovieData(model)
+        })
+    }, [])
+
+    useEffect(async () => {
+        await axios.get('http://localhost:8080/cinemas').then((response) => {
+            setCinemasList(response.data)
+        }).catch((error) => {
+            alert('Houve um erro, por favor tente novamente mais tarde');
+            setCinemasList([]);
+        })
+    }, []);
+
+    async function updateMovie() {
+        console.log(movieData);
+        await axios.patch('http://localhost:8080/tickets/update', {...movieData}).then((response)=>{
+            if(response.status == 200){
+                alert('Anúncio atualizado com sucesso!');
+                history.push('/painel');
+            }
+        }).catch((error)=>{
+            alert('Houve um erro, por favor tente novamente mais tarde')
+            console.log(error);
+        })
+    }
+
+    function handleChange(event) {
+        setMovieData({
+            ...movieData,
+            [event.target.name]: event.target.value
+        })
+    }
+
+    function discartChanges() {
+        history.goBack();
+    }
+
+    return (
+        <ContentContainer>
+            <h1>Editar publicação</h1>
+            <div className={styles['edit-form']}>
+
+                <div className={styles['form-row']}>
+                    <label>Filme</label>
+                    <input name="movie" value={movieData.movie} onChange={handleChange} className={styles['input-field']} />
+                </div>
+
+                <div className={styles['form-row']}>
+                    <label>Link da compra</label>
+                    <input name="link" value={movieData.link} onChange={handleChange} className={styles['input-field']} />
+                </div>
+
+                <div className={styles['form-row']}>
+                    <label>Imagem de capa</label>
+                    <input name="movieCover" value={movieData.movieCover} onChange={handleChange} className={styles['input-field']} />
+                </div>
+
+                <div className={styles['form-row']}>
+                    <label>Valor da inteira</label>
+                    <input name="inteira" value={movieData.inteira} onChange={handleChange} className={styles['input-field']} />
+                </div>
+
+                <div className={styles['form-row']}>
+                    <label>Valor da meia</label>
+                    <input name="meia" value={movieData.meia} onChange={handleChange} className={styles['input-field']} />
+                </div>
+
+                <div className={styles['form-row']}>
+                    <label>Cinema</label>
+                    <select name="cinema" value={movieData.cinema} onChange={handleChange} className={styles['input-field']}>
+                        {
+                            cinemasList.map(cinema => (
+                                <option>{cinema.name}</option>
+                            ))
+                        }
+                    </select>
+                </div>
+
+                <div className={styles['buttons-container']}>
+                    <button onClick={updateMovie} className={`${styles['button']} ${styles['save']}`}>
+                        <CheckIcon fill="white" width={25} height={25} />
+                        Salvar alterações
+                    </button>
+                    <button onClick={discartChanges} className={`${styles['button']} ${styles['discart']}`}>
+                        <BackIcon fill="white" width={25} height={25} />
+                        Cancelar
+                    </button>
+                </div>
+
+
+            </div>
+        </ContentContainer>
+    )
+}
